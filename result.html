@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES - Result</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #00c6ff, #0072ff, #f76b8a);
+            background-size: 220% 220%;
+            animation: bgShift 9s ease infinite;
+        }
+
+        .page-wrap {
+            min-height: 100vh;
+        }
+
+        .result-card {
+            border: none;
+            border-radius: 1.25rem;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+            animation: popIn 700ms ease;
+        }
+
+        .result-badge {
+            font-size: clamp(1.4rem, 4vw, 2.1rem);
+            font-weight: 700;
+            color: #fff;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            background: linear-gradient(90deg, #ff9f1a, #ff3f34, #ff6b81);
+            background-size: 200% 100%;
+            animation: shine 2.5s linear infinite;
+        }
+
+        .btn-back {
+            border-radius: 999px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container page-wrap d-flex align-items-center justify-content-center py-4">
+        <div class="row justify-content-center w-100">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                <div class="result-card p-4 p-md-5 text-center">
+                    <h1 class="text-white fw-bold mb-4">FLAMES Result</h1>
+                    <p class="text-white-50 mb-3">{{ your_name }} + {{ crush_name }}</p>
+                    <div class="result-badge mb-4">{{ result }}</div>
+                    <a href="{{ url_for('index') }}" class="btn btn-light btn-back px-4 py-2">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

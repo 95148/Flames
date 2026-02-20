@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAMES - Name Enter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --grad-a: #ff6b6b;
+            --grad-b: #ff9f43;
+            --grad-c: #48dbfb;
+            --card-bg: rgba(255, 255, 255, 0.2);
+            --text-main: #1f1f1f;
+        }
+
+        * {
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--grad-a), var(--grad-b), var(--grad-c));
+            background-size: 200% 200%;
+            animation: flowBg 8s ease infinite;
+        }
+
+        .page-wrap {
+            min-height: 100vh;
+        }
+
+        .flames-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 1.25rem;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            animation: riseIn 700ms ease-out;
+        }
+
+        .title {
+            color: var(--text-main);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-flames {
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #ff4757, #e056fd, #22a6b3);
+            background-size: 200% 100%;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            animation: pulse 1.8s infinite;
+        }
+
+        .btn-flames:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            background-position: 100% 0;
+        }
+
+        .form-control {
+            border-radius: 0.85rem;
+            padding: 0.85rem 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #22a6b3;
+            box-shadow: 0 0 0 0.2rem rgba(34, 166, 179, 0.25);
+        }
+
+        @keyframes flowBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes riseIn {
+            from { transform: translateY(12px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(224, 86, 253, 0.35); }
+            50% { box-shadow: 0 0 0 10px rgba(224, 86, 253, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container page-wrap d-flex align-items-center justify-content-center py-4">
+        <div class="row justify-content-center w-100">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <div class="flames-card p-4 p-md-5">
+                    <h1 class="title text-center mb-4">FLAMES Calculator</h1>
+                    <form action="{{ url_for('result') }}" method="POST" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="your_name" class="form-label fw-semibold">Your Name</label>
+                            <input type="text" class="form-control" id="your_name" name="your_name" required>
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="crush_name" class="form-label fw-semibold">Crush Name</label>
+                            <input type="text" class="form-control" id="crush_name" name="crush_name" required>
+                            <div class="invalid-feedback">Please enter your crush name.</div>
+                        </div>
+                        <button type="submit" class="btn btn-flames w-100 py-2">Check FLAMES Result</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (() => {
+            "use strict";
+            const forms = document.querySelectorAll(".needs-validation");
+            Array.from(forms).forEach((form) => {
+                form.addEventListener("submit", (event) => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add("was-validated");
+                }, false);
+            });
+        })();
+    </script>
+</body>
+</html>
